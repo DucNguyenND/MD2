@@ -50,6 +50,8 @@ public class ManagerStudent {
             case 7:
                 readAndWrite.write(students);
                 break;
+            case 8:
+                System.exit(1);
         }
     }
     }
