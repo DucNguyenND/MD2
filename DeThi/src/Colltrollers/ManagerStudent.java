@@ -27,7 +27,10 @@ public class ManagerStudent {
         System.out.println("8. Thoát");
         switch (Integer.parseInt(sc.nextLine())){
             case 1:
-                System.out.println(readAndWrite.read(students));
+                for (Student s:students
+                     ) {
+                    System.out.println(s.toString());
+                }
                 break;
             case 2:
                 addSV();
@@ -64,13 +67,10 @@ public class ManagerStudent {
         System.out.println("Nhập điểm trung bình");
         double markavg= Double.parseDouble(sc.nextLine());
         students.add(new Student(msv,name,age,gender,address,markavg));
-        readAndWrite.write(students);
     }
     public void update() {
         System.out.println("Nhập mã sinh viên cần sửa: ");
         int msv = Integer.parseInt(sc.nextLine());
-        readAndWrite.read(students);
-
         System.out.println("Nhập Mã Sinh Viên");
         int msv1=Integer.parseInt(sc.nextLine());
         System.out.println("Nhập họ tên");
@@ -89,8 +89,6 @@ public class ManagerStudent {
                 students.set(i,student);
             }
 
-            readAndWrite.write(students);
-
         }
     }
     public void remove(){
@@ -101,12 +99,9 @@ public class ManagerStudent {
                 students.remove(i);
             }
         }
-        readAndWrite.write(students);
     }
     public void sortById(){
         students.sort(new SortById1());
-        readAndWrite.write(students);
-        readAndWrite.read(students);
     }
 
 }
