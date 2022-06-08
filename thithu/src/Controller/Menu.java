@@ -46,9 +46,11 @@ public class Menu {
                 break;
             case 5:
                 sortByPrice();
+                System.out.println(products.get(products.size()-1));
                 break;
             case 6:
-                findMax();
+                sortByPrice();
+                System.out.println(products.get(products.size()-1));
                 break;
             case 7:
                 WriteAndRead.read(products);
@@ -141,20 +143,20 @@ public class Menu {
             System.out.println("Không có mã sản phẩm này");
         }
     }
-    public void findMax(){
-        int max=products.get(0).getPrice();
-        int index=-1;
-        for (int i = 1; i < products.size(); i++) {
-            if (max<products.get(i).getPrice()){
-                max= products.get(i).getPrice();
-            }
-        }
-        for (int i = 0; i < products.size(); i++) {
-            if (max==products.get(i).getPrice()){
-                System.out.println(products.get(i).toString());
-            }
-        }
-    }
+//    public void findMax(){
+//        int max=products.get(0).getPrice();
+//        int index=-1;
+//        for (int i = 1; i < products.size(); i++) {
+//            if (max<products.get(i).getPrice()){
+//                max= products.get(i).getPrice();
+//            }
+//        }
+//        for (int i = 0; i < products.size(); i++) {
+//            if (max==products.get(i).getPrice()){
+//                System.out.println(products.get(i).toString());
+//            }
+//        }
+//    }
     public void sortByPrice(){
         products.sort(new SortByPrice());
         for (int i = 0; i < products.size(); i++) {
