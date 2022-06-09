@@ -1,0 +1,3 @@
+duc12,Dell,dell ml,i5,full hd,8gb,8000mah,5,15265
+duc12,Dell,Dell 3543,i5-5200U,FullHD,4GB,4h,6,8500000
+duc12,Dell,Dell 3543,i5-5200U,FullHD,4GB,4h,6,8500000

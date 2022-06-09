@@ -8,6 +8,7 @@ public class ValidateChoice {
     private static String choice_regex="[1-2]";
     private static String choicestaff_regex="[1-5]";
     private static String choiceAdmin_regex="[1-6]";
+    private static String choiceGuest_regex="[1-6]";
     public static boolean validate(String regex, String regex1) {
         Pattern pattern = Pattern.compile(regex1);
         Matcher matcher = pattern.matcher(regex);
@@ -21,5 +22,8 @@ public class ValidateChoice {
     }
     public static boolean validateChoiceAdmin(String regex){
     return validate(regex,choiceAdmin_regex);
+    }
+    public static boolean validateChoiceGuest(String regex){
+        return validate(regex,choiceGuest_regex);
     }
 }

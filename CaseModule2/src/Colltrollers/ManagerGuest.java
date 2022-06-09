@@ -2,7 +2,9 @@ package Colltrollers;
 
 import Models.Computer;
 import Models.ComputerGuest;
+import io.ValidateChoice;
 import io.WriteAndReadCartGuest;
+import io.WriteAndReadStaff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +13,21 @@ import java.util.Scanner;
 public class ManagerGuest {
 
    static WriteAndReadCartGuest writeAndReadCartGuest=new WriteAndReadCartGuest();
-
    static Scanner scanner=new Scanner(System.in);
+   static  List<Computer> computerscartguest=new ArrayList<>();
     public static void MenuGuest(List<Computer> computers, List<ComputerGuest> cartguest, String nameLogin,String nameID){
+        (new WriteAndReadStaff()).read(computers);
         while (true){
-            System.out.println(nameLogin);
+                System.out.println(nameLogin);
         System.out.println("========= Menu =========");
         System.out.println("1. Xem laptop theo hãng ");
         System.out.println("2. Xem theo giá tiền");
         System.out.println("3. Mua hàng");
         System.out.println("4. Xem giỏ hàng");
-        System.out.println("5. Đăng xuất");
+        System.out.println("5. Thanh toán");
+        System.out.println("6. Đăng xuất");
+//        if (ValidateChoice.validateChoiceGuest(scanner.nextLine())){
+//        if (ValidateChoice.validateChoiceGuest(String.valueOf(Integer.parseInt(scanner.nextLine())))){
         switch (Integer.parseInt(scanner.nextLine())){
             case 1:
                 computers.sort(new SortByName());
@@ -34,19 +40,31 @@ public class ManagerGuest {
                 sortByPrice(computers);
                 break;
             case 3:
-                pay(computers,cartguest,nameID);
+                pay(computers,cartguest,nameLogin,nameID);
                 break;
             case 4:
-                showCart(cartguest);
+                showCart(cartguest,nameID);
                 break;
             case 5:
-                return;
+                showCart(cartguest,nameID);
+                System.out.println("Đơn hàng sẽ sớm gửi tới bạn");
+                break;
+            case 6:
+                Menu.login();
+                break;
+            default:
+                MenuGuest(computers,cartguest,nameLogin,nameID);
+                break;
+        }
+//            break;
+//        }else System.out.println("vui lòng chọn lại");
+//            }
+//                }else System.out.println("Vui lòng nhập lại");
         }
     }
-    }
     public static void sortByPrice(List<Computer> computers){
-        System.out.println("1. Sắp xếp theo giá giảm dần");
-        System.out.println("2. Sắp xếp theo giá tăng dần");
+        System.out.println("1. Sắp xếp theo giá tăng dần");
+        System.out.println("2. Sắp xếp theo giá giảm dần");
         switch (Integer.parseInt(scanner.nextLine())){
             case 1:
                 computers.sort(new PriceMaxToMin());
@@ -62,11 +80,12 @@ public class ManagerGuest {
                 break;
         }
     }
-    public static void buyLaptop(List<Computer> computers, List<ComputerGuest> cartguest,String nameID){
+    public static void buyLaptop(List<Computer> computers, List<ComputerGuest> cartguest,String nameLogin,String nameID){
         while (true){
-            for (Computer cpt:computers
-                 ) {
-                System.out.println(cpt.showLaptop());
+            for (int i = 0; i < computers.size(); i++) {
+                System.out.println((i+1)+". Tên mặt hàng: " + computers.get(i).getName());
+                System.out.println("   Giá Tiền:     "+ computers.get(i).getPrice());
+                System.out.println("");
             }
             int index=-1;
             System.out.println("Chọn sản phẩm bạn muốn mua");
@@ -82,30 +101,71 @@ public class ManagerGuest {
                 int amount=computers.get(i).getAmount();
                 int price= computers.get(i).getPrice();
                 cartguest.add(new ComputerGuest(nameID,brand,name,chip,display,ram,battery,amount,price));
-            }
+
+                }}
             writeAndReadCartGuest.write(cartguest);
             System.out.println("Bạn có muốn xem thêm sản phẩm không?");
             System.out.println("1. Có");
             System.out.println("2. Không");
-            if (Integer.parseInt(scanner.nextLine())==1){
-            }else if (Integer.parseInt(scanner.nextLine())==2){
-                break;
+            switch (Integer.parseInt(scanner.nextLine())){
+                case 1:
+                    computers.clear();
+                    MenuGuest(computers,cartguest,nameLogin,nameID);
+                    break;
+                case 2:
+                    showCart(cartguest,nameID);
+                    System.out.println("Đơn hàng sẽ sớm được gửi đến bạn");
+                    MenuGuest(computers,cartguest,nameLogin,nameID);
+                    break;
+            }
+            break;
+        }
+    }
+    public static void showCart(List<ComputerGuest> cartguest,String nameID){
+        int sumPrice=0;
+        writeAndReadCartGuest.read(cartguest);
+
+        for (int i = 0; i < cartguest.size(); i++) {
+            if (nameID.equals(cartguest.get(i).getNameID())){
+                String brand=cartguest.get(i).getBrand();
+                String name=cartguest.get(i).getName();
+                String chip=cartguest.get(i).getChip();
+                String display=cartguest.get(i).getDisplay();
+                String ram=cartguest.get(i).getRam();
+                String battery=cartguest.get(i).getBattery();
+                int amount=cartguest.get(i).getAmount();
+                int price= cartguest.get(i).getPrice();
+                computerscartguest.add(new Computer(brand,name,chip,display,ram,battery,amount,price));
             }
         }
-        }
-    }
-    public static void showCart(List<ComputerGuest> cartguest){
-        int sumPrice=0;
-        for (ComputerGuest cart:cartguest
+        for (Computer cart:computerscartguest
              ) {
-            System.out.println(cart.showLaptop());
+            System.out.println("Tên hàng hóa: "+cart.getName());
+            System.out.println("Giá tiền :" + cart.getPrice());
+            System.out.println("");
             sumPrice+=cart.getPrice();
         }
-        System.out.println("Tổng số tiền bạn phải thanh toán là: " + sumPrice);
+        System.out.println("Tổng số tiền  " + sumPrice);
     }
-    public static void pay(List<Computer> computers, List<ComputerGuest> cartguest,String nameID){
-        buyLaptop(computers,cartguest,nameID);
-        showCart(cartguest);
+    public static void pay(List<Computer> computers, List<ComputerGuest> cartguest,String nameLogin,String nameID){
+        buyLaptop(computers,cartguest,nameLogin,nameID);
+        showCart(cartguest,nameID);
 
     }
+//    public static void addCart(List<ComputerGuest> cartguest,String nameID){
+//        writeAndReadCartGuest.read(cartguest);
+//        for (int i = 0; i < cartguest.size(); i++) {
+//            if (nameID.equals(cartguest.get(i).getNameID())){
+//                String brand=cartguest.get(i).getBrand();
+//                String name=cartguest.get(i).getName();
+//                String chip=cartguest.get(i).getChip();
+//                String display=cartguest.get(i).getDisplay();
+//                String ram=cartguest.get(i).getRam();
+//                String battery=cartguest.get(i).getBattery();
+//                int amount=cartguest.get(i).getAmount();
+//                int price= cartguest.get(i).getPrice();
+//                computerscartguest.add(new Computer(brand,name,chip,display,ram,battery,amount,price));
+//            }
+//        }
+//    }
 }

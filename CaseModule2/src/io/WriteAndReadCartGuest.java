@@ -39,8 +39,8 @@ public class WriteAndReadCartGuest {
                 String display=arr[4];
                 String ram=arr[5];
                 String battery=arr[6];
-                int price= Integer.parseInt(arr[7]);
-                int amount= Integer.parseInt(arr[8]);
+                int price= Integer.parseInt(arr[8]);
+                int amount= Integer.parseInt(arr[7]);
                 computers.add(new ComputerGuest(nameID,brand,name,chip,display,ram,battery,amount,price));
                 str = bufferedReader.readLine();
             }

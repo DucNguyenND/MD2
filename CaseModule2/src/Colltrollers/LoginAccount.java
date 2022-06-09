@@ -27,6 +27,7 @@ public class LoginAccount {
             if (guests.get(i).getId().equals(id)&&guests.get(i).getPassword().equals(password)){
                 checkguest=1;
                 nameLogin= "Xin chào "+ guests.get(i).getName();
+                nameID=guests.get(i).getId();
                 break;
             }
         }
@@ -34,7 +35,7 @@ public class LoginAccount {
             if (staff.get(i).getId().equals(id)&&staff.get(i).getPassword().equals(password)){
                 checkstaff=1;
                 nameLogin="Xin chào "+ staff.get(i).getName();
-                nameID=staff.get(i).getName();
+                nameID=staff.get(i).getId();
                 break;
             }
         }
