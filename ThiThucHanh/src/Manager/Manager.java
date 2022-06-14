@@ -71,51 +71,7 @@ public class Manager {
             }
             }
     }}
-//        try {
-//            System.out.println("------ CHƯƠNG TRÌNH QUẢN LÝ SẢN PHẨM ------ ");
-//            System.out.println("1. Xem danh sách");
-//            System.out.println("2. Thêm mới");
-//            System.out.println("3. Cập nhật");
-//            System.out.println("4. Xóa");
-//            System.out.println("5. Sắp xếp");
-//            System.out.println("6. Tìm sản phấm có giá đắt nhất");
-//            System.out.println("7. Đọc từ file");
-//            System.out.println("8. Ghi vào File");
-//            System.out.println("9. Thoát");
-//            switch (Integer.parseInt(scanner.nextLine())){
-//                case 1:
-//                    showProduct();
-//                    break;
-//                case 2:
-//                    addProduct();
-//                    break;
-//                case 3:
-//                    editProduct();
-//                    break;
-//                case 4:
-//                    delete();
-//                    break;
-//                case 5:
-//                   sortByPrice();
-//                    break;
-//                case 6:
-//                    findMax();
-//                    break;
-//                case 7:
-//                    writeAndRead.reader();
-//                    break;
-//                case 8:
-//                    writeAndRead.Write(products);
-//                    System.out.println("Ghi thành công");
-//                    break;
-//                case 9:
-//                    System.exit(0);
-//                    break;
-//            }
-//        }catch (Exception e){
-//            System.out.println("Nhập sai, mời bạn nhập lại ");
-//        }
-//    }
+
     public void showProduct(){
         if (products.size()==0){
             System.out.println("Không có sản phẩm nào");
