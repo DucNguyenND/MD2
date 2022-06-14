@@ -139,8 +139,13 @@ public class Manager {
                     index=i;
                 }
             }
+            System.out.println("Vui lòng nhập Y để xóa!");
+            String choice=scanner.nextLine();
+            if (choice.equals("y")||choice.equals("Y")){
             products.remove(index);
-            System.out.println("Đã xóa");}
+            System.out.println("Đã xóa");
+            }else menu();
+        }
         catch (Exception e){
             System.out.println("Không có mã sản phẩm này");
         }
