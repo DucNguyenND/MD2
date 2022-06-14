@@ -135,7 +135,7 @@ public class Manager {
             System.out.println("Vui lòng nhập mã sản phẩm để xóa");
             String id=scanner.nextLine();
             for (int i = 0; i < products.size(); i++) {
-                if (products.get(i).equals(id)){
+                if (products.get(i).getId().equals(id)){
                     index=i;
                 }
             }
@@ -150,20 +150,7 @@ public class Manager {
             System.out.println("Không có mã sản phẩm này");
         }
     }
-    //    public void findMax(){
-//        int max=products.get(0).getPrice();
-//        int index=-1;
-//        for (int i = 1; i < products.size(); i++) {
-//            if (max<products.get(i).getPrice()){
-//                max= products.get(i).getPrice();
-//            }
-//        }
-//        for (int i = 0; i < products.size(); i++) {
-//            if (max==products.get(i).getPrice()){
-//                System.out.println(products.get(i).toString());
-//            }
-//        }
-//    }
+
     public void sortByPrice(){
         while (true){
             try {
